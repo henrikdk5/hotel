@@ -45,17 +45,11 @@ addEventListener('DOMContentLoaded', function () {
 
 // map
 function initMap() {
-        var uluru = {lat:  19.735121, lng: -155.014044};  
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 14,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
+}
 
 
 
