@@ -23,10 +23,10 @@ $(function ($) {
 
 //for datepicker
 
-addEventListener('DOMContentLoaded', function () {
-	
+addEventListener('DOMContentLoaded', function () {  
+  document.getElementById('rooms').addEventListener('change', generateInputs());
+  document.getElementById('number1').addEventListener('change', generateInputs());
 
-   
     
 	pickmeup('.range', {
 		mode : 'range',
@@ -42,15 +42,48 @@ addEventListener('DOMContentLoaded', function () {
     
 });
 
+function generateInputs() {
+  //Find inputsne brugeren kan ændre
+  let roomSelect =  document.getElementById('rooms');
+  let roomCount = document.getElementById('number1');
+
+  //Find ud af hvad der er valgt i inputsne.
+  let sku = roomSelect.value;
+  let numberOfRooms = roomCount.value;
+    
+  //Find parent som variablerne ligger i.
+  let parentElement = document.getElementById('product-list');
+
+  //Og tøm den, sådan der ikke er gamle værdier
+  $('#product-list').empty();
+
+  let roomNode = document.createElement('input');
+  roomNode.setAttribute('type', 'hidden');
+  roomNode.setAttribute('name', 'products[0][plan_id]');
+  roomNode.setAttribute('value', sku);
+
+  let roomAmountNode = document.createElement('input');
+  roomAmountNode.setAttribute('type', 'hidden');
+  roomAmountNode.setAttribute('name', 'products[0][amount]');
+  roomAmountNode.setAttribute('value', numberOfRooms);
+
+  parentElement.appendChild(roomNode);
+  parentElement.appendChild(roomAmountNode);
+}
 
 // map
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  });
-}
-
+        var uluru = {lat:  19.735121, lng: -155.014044};  
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }    
+// map
 
 
 
